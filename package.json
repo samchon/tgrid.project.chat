@@ -1,0 +1,22 @@
+{
+  "name": "tgrid.projects.chat-application",
+  "version": "0.0.0",
+  "description": "Chat Application, an example project of TGrid",
+  "main": "bin/index.js",
+  "scripts": {
+    "test": "node bin/test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samchon/tgrid.projects.chat-application.git"
+  },
+  "author": "Jeongho Nam",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/samchon/tgrid.projects.chat-application/issues"
+  },
+  "homepage": "https://github.com/samchon/tgrid.projects.chat-application#readme",
+  "dependencies": {
+    "tgrid": "^0.2.0-dev.20190909"
+  }
+}
