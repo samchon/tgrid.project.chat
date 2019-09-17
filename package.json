@@ -4,7 +4,7 @@
   "description": "Chat Application, an example project of TGrid",
   "main": "bin/index.js",
   "scripts": {
-    "test": "node bin/test"
+    "dev": "ws -p 9991 & webpack -w --mode development"
   },
   "repository": {
     "type": "git",
@@ -18,5 +18,18 @@
   "homepage": "https://github.com/samchon/tgrid.projects.chat-application#readme",
   "dependencies": {
     "tgrid": "^0.2.0-dev.20190909"
+  },
+  "devDependencies": {
+    "@types/react": "^16.9.2",
+    "@types/react-bootstrap": "^0.32.19",
+    "@types/react-dom": "^16.9.0",
+    "core-js": "^3.2.1",
+    "react": "^16.9.0",
+    "react-bootstrap": "^1.0.0-beta.12",
+    "react-dom": "^16.9.0",
+    "ts-loader": "^6.1.0",
+    "typescript": "^3.6.3",
+    "webpack": "^4.40.2",
+    "webpack-cli": "^3.3.9"
   }
 }

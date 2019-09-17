@@ -1,0 +1,31 @@
+body
+{
+    overflow: hidden;
+    width: 100%;
+    min-height: 100%;
+}
+
+.printer
+{
+    width: 100%;
+    min-height: 100%;
+}
+.participants
+{
+    width: 200px;
+    float: right;
+    overflow-y: auto;
+}
+.contents
+{
+    width: auto;
+    float: none;
+    overflow-y: auto;
+}
+
+.input
+{
+    width: auto;
+    position: absolute;
+    bottom: 0;
+}
