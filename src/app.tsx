@@ -1,21 +1,23 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Modal, Button } from "react-bootstrap";
+import { Panel, Button } from "react-bootstrap";
 
-import { WebConnector } from "tgrid/protocols/web";
+import { WebConnector } from "tgrid/protocols/web/WebConnector";
 import { Driver } from "tgrid/components/Driver";
 
 import { IChatService } from "./controllers/IChatService";
 import { ChatPrinter } from "./providers/ChatPrinter";
+import { ChatMovie } from "./movies/ChatMovie";
 
 class ChatApplication extends React.Component<ChatApplication.IProps>
 {
-    private async _Handle_login(): Promise<void>
+    private async _Go_participate(): Promise<void>
     {
         let input: HTMLInputElement = document.getElementById("name_input") as HTMLInputElement;
         let name: string = input.value;
-
-        let service: Driver<IChatService> = this.props.service;
+        
+        let connector: WebConnector = this.props.connector;
+        let service: Driver<IChatService> = connector.getDriver<IChatService>();
         let participants: string[] | false = await service.setName(name);
         
         if (participants === false)
@@ -24,35 +26,38 @@ class ChatApplication extends React.Component<ChatApplication.IProps>
             return;
         }
 
+        let printer: ChatPrinter = new ChatPrinter(name, participants);
+        connector.provider = printer;
 
+        ReactDOM.render(<ChatMovie service={service} printer={printer} />, document.body);
     }
 
     public render(): JSX.Element
     {
-        return <Modal>
-            <Modal.Header>
-                <Modal.Title> Particiate in Chat Application </Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
+        return <Panel>
+            <Panel.Heading>
+                <Panel.Title> Particiate in Chat Application </Panel.Title>
+            </Panel.Heading>
+            <Panel.Body>
                 Insert your name: <input id="name_input" type="text"></input>
-            </Modal.Body>
-            <Modal.Footer>
-                <Button variant="primary"> Participate </Button>
-            </Modal.Footer>
-        </Modal>
+            </Panel.Body>
+            <Panel.Footer>
+                <Button bsStyle="primary"
+                        onClick={this._Go_participate.bind(this)}> 
+                    Participate 
+                </Button>
+            </Panel.Footer>
+        </Panel>
     }
 
     public static async main(): Promise<void>
     {
         let connector: WebConnector = new WebConnector();
-        await connector.connect(`ws://${window.location.host}:10103`);
-
-        let service: Driver<IChatService> = connector.getDriver();
+        await connector.connect(`ws://${window.location.hostname}:10103`);
 
         ReactDOM.render
         (
-            <ChatApplication connector={connector} 
-                             service={service} />, 
+            <ChatApplication connector={connector} />, 
             document.body
         );
     }
@@ -62,7 +67,6 @@ namespace ChatApplication
     export interface IProps
     {
         connector: WebConnector;
-        service: Driver<IChatService>;
     }
 }
 window.onload = ChatApplication.main;

@@ -5,27 +5,29 @@ body
     min-height: 100%;
 }
 
-.printer
+.main
 {
     width: 100%;
     min-height: 100%;
 }
 .participants
 {
-    width: 200px;
+    width: 300px;
     float: right;
-    overflow-y: auto;
 }
-.contents
+.messages
 {
     width: auto;
     float: none;
-    overflow-y: auto;
+    overflow: hidden;
 }
 
-.input
+.panel-pincer
 {
-    width: auto;
-    position: absolute;
-    bottom: 0;
+    height: 50px;
+}
+.panel-body
+{
+    height: calc(100% - 100px);
+    overflow-y: auto;
 }
