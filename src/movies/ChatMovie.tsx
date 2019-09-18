@@ -1,14 +1,23 @@
 import React from "react";
-import { Driver } from "tgrid/components/Driver";
+import { Panel, 
+    ListGroup, ListGroupItem, 
+    Button, FormControl, InputGroup, 
+    Glyphicon 
+} from "react-bootstrap";
 
+import { Driver } from "tgrid/components/Driver";
 import { IChatService } from "../controllers/IChatService";
 import { ChatPrinter } from "../providers/ChatPrinter";
-import { Panel, ListGroup, ListGroupItem, Button, FormControl, InputGroup, Glyphicon } from "react-bootstrap";
 
 export class ChatMovie
     extends React.Component<ChatMovie.IProps>
 {
     private to_: string | null = null;
+
+    private get input_(): HTMLInputElement
+    {
+        return document.getElementById("message_input") as HTMLInputElement;
+    }
 
     //----------------------------------------------------------------
     //  CONSTRUCTOR
@@ -17,14 +26,33 @@ export class ChatMovie
     {
         super(props);
 
-        // REFRESH WHENEVER MESSAGE COMES
-        props.printer.assign(() => this.setState({}));
+        // WHENEVER EVENT COMES
+        let printer: ChatPrinter = props.printer;
+        printer.assign(() => 
+        {
+            // ERASE WHISPER TARGET WHEN EXIT
+            if (this.to_ !== null)
+            {
+                let index: number = printer.participants.findIndex(name => name === this.to_);
+                if (index === -1)
+                    this.to_ = null;
+            }
+            
+            // REFRESH PAGE
+            this.setState({})
+        });
     }
 
     public componentDidMount()
     {
         let input: HTMLInputElement = document.getElementById("message_input") as HTMLInputElement;
         input.select();
+    }
+
+    public componentDidUpdate()
+    {
+        let element: HTMLElement = document.getElementById("message_body")!;
+        element.scrollTop = element.scrollHeight - element.clientHeight;
     }
 
     //----------------------------------------------------------------
@@ -38,8 +66,7 @@ export class ChatMovie
 
     private _Send_message(): void
     {
-        let input: HTMLInputElement = document.getElementById("message_input") as HTMLInputElement;
-        let content: string = input.value;
+        let content: string = this.input_.value;
         let service: Driver<IChatService> = this.props.service;
 
         if (this.to_ === null)
@@ -47,8 +74,8 @@ export class ChatMovie
         else
             service.whisper(this.to_, content);
         
-        input.value = "";
-        input.select();
+        this.input_.value = "";
+        this.input_.select();
     }
 
     private _Select_participant(name: string): void
@@ -56,6 +83,8 @@ export class ChatMovie
         this.to_ = (this.to_ === name)
             ? null
             : name;
+        
+        this.input_.select();
         this.setState({});
     }
 
@@ -65,6 +94,8 @@ export class ChatMovie
     public render(): JSX.Element
     {
         let printer: ChatPrinter = this.props.printer;
+
+        let myName: string = printer.name;
         let participants: string[] = printer.participants;
         let messages: ChatPrinter.IMessage[] = printer.messages;
 
@@ -74,17 +105,21 @@ export class ChatMovie
                 <Panel.Heading className="panel-pincer">
                     <Panel.Title> 
                         <Glyphicon glyph="user" />
-                        {" "}
-                        Participants: #{participants.length} 
+                        {` Participants: #${participants.length}`}
                     </Panel.Title> 
                 </Panel.Heading>
-                <Panel.Body className="panel-body">
+                <Panel.Body id="message_body" 
+                            className="panel-body">
                     <ListGroup>
                     {participants.map(name => 
                     {
-                        return <ListGroupItem active={name === this.to_} 
-                                              onClick={this._Select_participant.bind(this, name)}> 
-                            {name} 
+                        return <ListGroupItem active={name === myName} 
+                                              bsStyle={name === this.to_ ? "warning" : undefined}
+                                              onClick={this._Select_participant.bind(this, name)}>
+                        {name === this.to_
+                            ? "> " + name
+                            : name
+                        }
                         </ListGroupItem>;
                     })}
                     </ListGroup>
@@ -98,17 +133,33 @@ export class ChatMovie
                 <Panel.Heading className="panel-pincer">
                     <Panel.Title> 
                         <Glyphicon glyph="list" />
-                        {" "}
-                        Messages 
+                        {" Message"}
                     </Panel.Title>
                 </Panel.Heading>
                 <Panel.Body className="panel-body">
                     {messages.map(msg =>
                     {
+                        let fromMe: boolean = (msg.from === myName);
+                        let style: React.CSSProperties = {
+                            textAlign: fromMe ? "right" : undefined,
+                            fontStyle: msg.to ? "italic" : undefined,
+                            color: msg.to ? "gray" : undefined
+                        };
+                        let content: string = msg.content;
+
                         if (msg.to)
-                            return <p><i><b>{msg.from}</b> whispered to {msg.to}</i>: {msg.content}</p>;
-                        else
-                            return <p><b>{msg.from}</b>: {msg.content}</p>
+                        {
+                            let head: string = (msg.from === myName)
+                                ? `(whisper to ${msg.to})`
+                                : "(whisper)";
+                            content = `${head} ${content}`;
+                        }
+
+                        return <p style={style}>
+                            <b style={{ fontSize: 18 }}> {msg.from} </b>
+                            <br/>
+                            {content}
+                        </p>;
                     })}
                 </Panel.Body>
                 <Panel.Footer className="panel-pincer">

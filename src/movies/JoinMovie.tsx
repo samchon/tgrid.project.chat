@@ -65,8 +65,7 @@ export class JoinMovie extends React.Component<JoinMovie.IProps>
             <Panel.Heading>
                 <Panel.Title> 
                     <Glyphicon glyph="list" />
-                    {" "}
-                    Chat Application 
+                    {" Chat Application "}
                 </Panel.Title>
             </Panel.Heading>
             <Panel.Body>
@@ -80,8 +79,7 @@ export class JoinMovie extends React.Component<JoinMovie.IProps>
                 <Button bsStyle="primary"
                         onClick={this._Participate.bind(this)}> 
                     <Glyphicon glyph="share-alt" />
-                    {" "}
-                    Participate in
+                    {" Participate in"}
                 </Button>
             </Panel.Footer>
         </Panel>

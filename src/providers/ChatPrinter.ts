@@ -1,4 +1,6 @@
-export class ChatPrinter
+import { IChatPrinter } from "../controllers/IChatPrinter";
+
+export class ChatPrinter implements IChatPrinter
 {
     private listener_?: ()=>void;
 
@@ -30,13 +32,13 @@ export class ChatPrinter
     //----------------------------------------------------------------
     //  METHODS FOR REMOTE FUNCTION CALL
     //----------------------------------------------------------------
-    protected insert(name: string): void
+    public insert(name: string): void
     {
         this.participants.push(name);
         this._Inform();
     }
 
-    protected erase(name: string): void
+    public erase(name: string): void
     {
         let index: number = this.participants.findIndex(str => str === name);
         if (index !== -1)
@@ -45,7 +47,7 @@ export class ChatPrinter
         this._Inform();
     }
 
-    protected talk(from: string, content: string): void
+    public talk(from: string, content: string): void
     {
         this.messages.push({ 
             from: from, 
@@ -54,7 +56,7 @@ export class ChatPrinter
         this._Inform();
     }
 
-    protected whisper(from: string, to: string, content: string): void
+    public whisper(from: string, to: string, content: string): void
     {
         this.messages.push({ 
             from: from, 

@@ -86,13 +86,18 @@ export class ChatService implements IChatService
         else if (this.participants_.has(to) === false)
             throw new Error("Unable to find the matched name");
 
-        // INFORM TO TARGET PARTICIPANTS
+        //----
+        // INFORM TO PARTICIPANTS
+        //----
+        // TO SPEAKER
         let from: string = this.name_;
-
-        for (let printer of [ this.printer_, this.participants_.get(to) ])
+        this.printer_.whisper(from, to, content).catch(() => {});
+        
+        // TO LISTENER
+        if (from !== to)
         {
-            let p: Promise<void> = printer.whisper(from, to, content);
-            p.catch(() => {});
+            let target: Driver<IChatPrinter> = this.participants_.get(to);
+            target.whisper(from, to, content).catch(() => {});
         }
     }
 }
