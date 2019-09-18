@@ -6,7 +6,8 @@
   "scripts": {
     "serve": "node bin/server",
     "start": "ws -p 9991",
-    "dev": "webpack -w --mode development"
+    "dev": "webpack -w --mode development",
+    "build": "tsc && webpack --mode production"
   },
   "repository": {
     "type": "git",
@@ -19,7 +20,7 @@
   },
   "homepage": "https://github.com/samchon/tgrid.projects.chat-application#readme",
   "dependencies": {
-    "tgrid": "^0.2.0-dev.20190917"
+    "tgrid": "^0.2.0-dev.20190918"
   },
   "devDependencies": {
     "@types/node": "^12.7.5",
