@@ -30,13 +30,9 @@ export class ChatMovie
         let printer: ChatPrinter = props.printer;
         printer.assign(() => 
         {
-            // ERASE WHISPER TARGET WHEN EXIT
-            if (this.to_ !== null)
-            {
-                let index: number = printer.participants.findIndex(name => name === this.to_);
-                if (index === -1)
-                    this.to_ = null;
-            }
+            // ERASE WHISPER TARGET
+            if (this.to_ !== null && printer.participants.has(this.to_) === false)
+                this.to_ = null;
             
             // REFRESH PAGE
             this.setState({})
@@ -96,7 +92,7 @@ export class ChatMovie
         let printer: ChatPrinter = this.props.printer;
 
         let myName: string = printer.name;
-        let participants: string[] = printer.participants;
+        let participants: string[] = [...printer.participants];
         let messages: ChatPrinter.IMessage[] = printer.messages;
 
         return <div className="main">
@@ -156,7 +152,7 @@ export class ChatMovie
                         }
 
                         return <p style={style}>
-                            <b style={{ fontSize: 18 }}> {msg.from} </b>
+                            <b style={ { fontSize: 18 } }> {msg.from} </b>
                             <br/>
                             {content}
                         </p>;

@@ -1,11 +1,13 @@
 import { IChatPrinter } from "../controllers/IChatPrinter";
 
+import { HashSet } from "tstl/container/HashSet";
+
 export class ChatPrinter implements IChatPrinter
 {
     private listener_?: ()=>void;
 
     public readonly name: string;
-    public readonly participants: string[];
+    public readonly participants: HashSet<string>;
     public readonly messages: ChatPrinter.IMessage[];
 
     //----------------------------------------------------------------
@@ -14,7 +16,7 @@ export class ChatPrinter implements IChatPrinter
     public constructor(name: string, participants: string[])
     {
         this.name = name;
-        this.participants = participants;
+        this.participants = new HashSet(participants);
         this.messages = [];
     }
 
@@ -34,16 +36,13 @@ export class ChatPrinter implements IChatPrinter
     //----------------------------------------------------------------
     public insert(name: string): void
     {
-        this.participants.push(name);
+        this.participants.insert(name);
         this._Inform();
     }
 
     public erase(name: string): void
     {
-        let index: number = this.participants.findIndex(str => str === name);
-        if (index !== -1)
-            this.participants.splice(index, 1);
-
+        this.participants.erase(name);
         this._Inform();
     }
 
