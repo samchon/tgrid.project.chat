@@ -104,8 +104,7 @@ export class ChatMovie
                         {` Participants: #${participants.length}`}
                     </Panel.Title> 
                 </Panel.Heading>
-                <Panel.Body id="message_body" 
-                            className="panel-body">
+                <Panel.Body className="panel-body">
                     <ListGroup>
                     {participants.map(name => 
                     {
@@ -132,7 +131,8 @@ export class ChatMovie
                         {" Message"}
                     </Panel.Title>
                 </Panel.Heading>
-                <Panel.Body className="panel-body">
+                <Panel.Body id="message_body" 
+                            className="panel-body">
                     {messages.map(msg =>
                     {
                         let fromMe: boolean = (msg.from === myName);
