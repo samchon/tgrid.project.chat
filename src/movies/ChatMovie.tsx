@@ -121,7 +121,7 @@ export class ChatMovie
                     </ListGroup>
                 </Panel.Body>
                 <Panel.Footer className="panel-pincer">
-                    Example Project of TGrid
+                    Demo Project of <a href="https://tgrid.dev" target="_blank">TGrid</a>
                 </Panel.Footer>
             </Panel>
             <Panel bsStyle="primary"
@@ -168,11 +168,11 @@ export class ChatMovie
                             {this.whisper_to_ === null
                                 ? <React.Fragment>
                                     <Glyphicon glyph="bullhorn" />
-                                    Talk to everyone
+                                    {" Talk to everyone"}
                                 </React.Fragment>
                                 : <React.Fragment>
                                     <Glyphicon glyph="screenshot" />
-                                    Whisper to {this.whisper_to_}
+                                    {` Whisper to ${this.whisper_to_}`}
                                 </React.Fragment>
                             }
                             </Button>

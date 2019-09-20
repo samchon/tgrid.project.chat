@@ -61,6 +61,11 @@ export class JoinMovie extends React.Component<JoinMovie.IProps>
     //----------------------------------------------------------------
     public render(): JSX.Element
     {
+        const TGRID = "https://tgrid.dev";
+        const GITHUB = "https://github.com/samchon/tgrid.projects.chat-application";
+        const GUIDE_EN = "https://tgrid.dev/english/tutorial/projects/chat-application.html";
+        const GUIDE_KR = "https://tgrid.dev/korean/tutorial/projects/chat-application.html";
+
         return <Panel>
             <Panel.Heading>
                 <Panel.Title> 
@@ -69,11 +74,22 @@ export class JoinMovie extends React.Component<JoinMovie.IProps>
                 </Panel.Title>
             </Panel.Heading>
             <Panel.Body>
-                Insert your name: 
-                <input id="name_input" 
-                       type="text" 
-                       onKeyUp={this._Handle_keyUp.bind(this)}
-                       />
+                <h1> Chat Application </h1>
+                <p> Demo Project of {this._Render_link(TGRID, "TGrid")} </p>
+                <ul>
+                    <li> {this._Render_link(GITHUB, "Github Repository")} </li>
+                    <li> Guide Documents </li>
+                    <ul>
+                        <li> {this._Render_link(GUIDE_EN, "English")} </li>
+                        <li> {this._Render_link(GUIDE_KR, "한국어")} </li>
+                    </ul>
+                </ul>
+                <p>
+                    Insert your name: 
+                    <input id="name_input" 
+                        type="text" 
+                        onKeyUp={this._Handle_keyUp.bind(this)} />
+                </p>
             </Panel.Body>
             <Panel.Footer>
                 <Button bsStyle="primary"
@@ -83,6 +99,11 @@ export class JoinMovie extends React.Component<JoinMovie.IProps>
                 </Button>
             </Panel.Footer>
         </Panel>
+    }
+    
+    private _Render_link(url: string, text: string): JSX.Element
+    {
+        return <a href={url} target="_blank">{text}</a>;
     }
 }
 namespace JoinMovie
