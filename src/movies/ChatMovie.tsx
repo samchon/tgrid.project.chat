@@ -12,7 +12,7 @@ import { ChatPrinter } from "../providers/ChatPrinter";
 export class ChatMovie
     extends React.Component<ChatMovie.IProps>
 {
-    private to_: string | null = null;
+    private whisper_to_: string | null = null;
 
     private get input_(): HTMLInputElement
     {
@@ -31,8 +31,8 @@ export class ChatMovie
         printer.assign(() => 
         {
             // ERASE WHISPER TARGET
-            if (this.to_ !== null && printer.participants.has(this.to_) === false)
-                this.to_ = null;
+            if (this.whisper_to_ !== null && printer.participants.has(this.whisper_to_) === false)
+                this.whisper_to_ = null;
             
             // REFRESH PAGE
             this.setState({})
@@ -65,10 +65,10 @@ export class ChatMovie
         let content: string = this.input_.value;
         let service: Driver<IChatService> = this.props.service;
 
-        if (this.to_ === null)
+        if (this.whisper_to_ === null)
             service.talk(content);
         else
-            service.whisper(this.to_, content);
+            service.whisper(this.whisper_to_, content);
         
         this.input_.value = "";
         this.input_.select();
@@ -76,7 +76,7 @@ export class ChatMovie
 
     private _Select_participant(name: string): void
     {
-        this.to_ = (this.to_ === name)
+        this.whisper_to_ = (this.whisper_to_ === name)
             ? null
             : name;
         
@@ -110,9 +110,9 @@ export class ChatMovie
                     {participants.map(name => 
                     {
                         return <ListGroupItem active={name === myName} 
-                                              bsStyle={name === this.to_ ? "warning" : undefined}
+                                              bsStyle={name === this.whisper_to_ ? "warning" : undefined}
                                               onClick={this._Select_participant.bind(this, name)}>
-                        {name === this.to_
+                        {name === this.whisper_to_
                             ? "> " + name
                             : name
                         }
@@ -165,14 +165,14 @@ export class ChatMovie
                                      onKeyUp={this._Handle_keyUp.bind(this)} />
                         <InputGroup.Button>
                             <Button onClick={this._Send_message.bind(this)}>
-                            {this.to_ === null
+                            {this.whisper_to_ === null
                                 ? <React.Fragment>
                                     <Glyphicon glyph="bullhorn" />
                                     Talk to everyone
                                 </React.Fragment>
                                 : <React.Fragment>
                                     <Glyphicon glyph="screenshot" />
-                                    Whisper to {this.to_}
+                                    Whisper to {this.whisper_to_}
                                 </React.Fragment>
                             }
                             </Button>

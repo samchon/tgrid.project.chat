@@ -20,7 +20,7 @@ async function main(): Promise<void>
 
         // DESTRUCTOR
         await acceptor.join();
-        await service.destructor();
+        service.destructor();
     });
 }
 main();

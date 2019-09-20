@@ -23,7 +23,7 @@ export class ChatService implements IChatService
         this.printer_ = printer;
     }
 
-    public async destructor(): Promise<void>
+    public destructor(): void
     {
         if (this.name_ === undefined)
             return;
@@ -32,11 +32,11 @@ export class ChatService implements IChatService
         this.participants_.erase(this.name_);
 
         // INFORM TO OTHERS
-        let promises: Promise<void>[] = [];
         for (let it of this.participants_)
-            promises.push( it.second.erase(this.name_) );
-            
-        await Promise.all(promises);
+        {
+            let p: Promise<void> = it.second.erase(this.name_);
+            p.catch(() => {});
+        }
     }
 
     //----------------------------------------------------------------
