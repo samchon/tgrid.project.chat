@@ -8,21 +8,22 @@ import { Driver } from "tgrid/components/Driver";
 import { IChatService } from "../controllers/IChatService";
 import { ChatPrinter } from "../providers/ChatPrinter";
 import { ChatMovie } from "./ChatMovie";
+import { Global } from "../Global";
 
 export class JoinMovie extends React.Component<JoinMovie.IProps>
 {
-    //----------------------------------------------------------------
-    //  CONSTRUCTOR
-    //----------------------------------------------------------------
+    /* ----------------------------------------------------------------
+        CONSTRUCTOR
+    ---------------------------------------------------------------- */
     public componentDidMount()
     {
         let input: HTMLInputElement = document.getElementById("name_input") as HTMLInputElement;
         input.select();
     }
 
-    //----------------------------------------------------------------
-    //  EVENT HANDLERS
-    //----------------------------------------------------------------
+    /* ----------------------------------------------------------------
+        EVENT HANDLERS
+    ---------------------------------------------------------------- */
     private _Handle_keyUp(event: React.KeyboardEvent): void
     {
         if (event.keyCode === 13)
@@ -56,16 +57,11 @@ export class JoinMovie extends React.Component<JoinMovie.IProps>
         ReactDOM.render(<ChatMovie service={service} printer={printer} />, document.body);
     }
 
-    //----------------------------------------------------------------
-    //  RENDERER
-    //----------------------------------------------------------------
+    /* ----------------------------------------------------------------
+        RENDERER
+    ---------------------------------------------------------------- */
     public render(): JSX.Element
     {
-        const TGRID = "https://tgrid.dev";
-        const GITHUB = "https://github.com/samchon/tgrid.projects.chat-application";
-        const GUIDE_EN = "https://tgrid.dev/english/tutorial/projects/chat-application.html";
-        const GUIDE_KR = "https://tgrid.dev/korean/tutorial/projects/chat-application.html";
-
         return <Panel>
             <Panel.Heading>
                 <Panel.Title> 
@@ -75,13 +71,13 @@ export class JoinMovie extends React.Component<JoinMovie.IProps>
             </Panel.Heading>
             <Panel.Body>
                 <h1> Chat Application </h1>
-                <p> Demo Project of {this._Render_link(TGRID, "TGrid")} </p>
+                <p> Demo Project of {this._Render_link(Global.TGRID, "TGrid")} </p>
                 <ul>
-                    <li> {this._Render_link(GITHUB, "Github Repository")} </li>
+                    <li> {this._Render_link(Global.REPOSITORY, "Github Repository")} </li>
                     <li> Guide Documents </li>
                     <ul>
-                        <li> {this._Render_link(GUIDE_EN, "English")} </li>
-                        <li> {this._Render_link(GUIDE_KR, "한국어")} </li>
+                        <li> {this._Render_link(Global.GUIDE_EN, "English")} </li>
+                        <li> {this._Render_link(Global.GUIDE_KR, "한국어")} </li>
                     </ul>
                 </ul>
                 <p>

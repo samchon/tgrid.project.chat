@@ -10,9 +10,9 @@ export class ChatService implements IChatService
     private printer_: Driver<IChatPrinter>;
     private name_?: string;
 
-    //----------------------------------------------------------------
-    //  CONSTRUCTORS
-    //----------------------------------------------------------------
+    /* ----------------------------------------------------------------
+        CONSTRUCTORS
+    ---------------------------------------------------------------- */
     public constructor
         (
             participants: HashMap<string, Driver<IChatPrinter>>, 
@@ -39,9 +39,9 @@ export class ChatService implements IChatService
         }
     }
 
-    //----------------------------------------------------------------
-    //  INTERACTIONS
-    //---------------------------------------------------------------- */
+    /* ----------------------------------------------------------------
+        INTERACTIONS
+    ---------------------------------------------------------------- */
     public setName(name: string): string[] | false
     {
         if (this.participants_.has(name))

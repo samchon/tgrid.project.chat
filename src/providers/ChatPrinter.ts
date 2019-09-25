@@ -10,9 +10,9 @@ export class ChatPrinter implements IChatPrinter
     public readonly participants: HashSet<string>;
     public readonly messages: ChatPrinter.IMessage[];
 
-    //----------------------------------------------------------------
-    //  CONSTRUCTOR
-    //----------------------------------------------------------------
+    /* ----------------------------------------------------------------
+        CONSTRUCTOR
+    ---------------------------------------------------------------- */
     public constructor(name: string, participants: string[])
     {
         this.name = name;
@@ -31,9 +31,9 @@ export class ChatPrinter implements IChatPrinter
             this.listener_();
     }
 
-    //----------------------------------------------------------------
-    //  METHODS FOR REMOTE FUNCTION CALL
-    //----------------------------------------------------------------
+    /* ----------------------------------------------------------------
+        METHODS FOR REMOTE FUNCTION CALL
+    ---------------------------------------------------------------- */
     public insert(name: string): void
     {
         this.participants.insert(name);

@@ -19,9 +19,9 @@ export class ChatMovie
         return document.getElementById("message_input") as HTMLInputElement;
     }
 
-    //----------------------------------------------------------------
-    //  CONSTRUCTOR
-    //----------------------------------------------------------------
+    /* ----------------------------------------------------------------
+        CONSTRUCTOR
+    ---------------------------------------------------------------- */
     public constructor(props: ChatMovie.IProps)
     {
         super(props);
@@ -51,9 +51,9 @@ export class ChatMovie
         element.scrollTop = element.scrollHeight - element.clientHeight;
     }
 
-    //----------------------------------------------------------------
-    //  EVENT HANDLERS
-    //----------------------------------------------------------------
+    /* ----------------------------------------------------------------
+        EVENT HANDLERS
+    ---------------------------------------------------------------- */
     private _Handle_keyUp(event: React.KeyboardEvent<FormControl>): void
     {
         if (event.keyCode === 13)
@@ -84,9 +84,9 @@ export class ChatMovie
         this.setState({});
     }
 
-    //----------------------------------------------------------------
-    //  RENDERER
-    //----------------------------------------------------------------
+    /* ----------------------------------------------------------------
+        RENDERER
+    ---------------------------------------------------------------- */
     public render(): JSX.Element
     {
         let printer: ChatPrinter = this.props.printer;
