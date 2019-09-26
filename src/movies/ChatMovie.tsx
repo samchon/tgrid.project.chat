@@ -8,6 +8,7 @@ import { Panel,
 import { Driver } from "tgrid/components/Driver";
 import { IChatService } from "../controllers/IChatService";
 import { ChatPrinter } from "../providers/ChatPrinter";
+import { Global } from "../Global";
 
 export class ChatMovie
     extends React.Component<ChatMovie.IProps>
@@ -120,7 +121,7 @@ export class ChatMovie
                     </ListGroup>
                 </Panel.Body>
                 <Panel.Footer className="panel-pincer">
-                    Demo Project of <a href="https://tgrid.dev" target="_blank">TGrid</a>
+                    Demo Project of <a href={Global.TGRID} target="_blank">TGrid</a>
                 </Panel.Footer>
             </Panel>
             <Panel bsStyle="primary"
