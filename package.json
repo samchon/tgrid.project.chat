@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/samchon/tgrid.projects.chat#readme",
   "dependencies": {
-    "tgrid": "^0.2.0-dev.20190918"
+    "tgrid": "^0.2.0"
   },
   "devDependencies": {
     "@types/node": "^12.7.5",
