@@ -64,10 +64,7 @@ export class ChatMovie
 
     public componentDidUpdate()
     {
-        let element: HTMLElement = document.getElementById("message_body")!;
-        element.scrollTop = element.scrollHeight;
-
-        console.log(element.scrollTop, element.scrollHeight, element.clientHeight, element.offsetHeight);
+        document.body.scrollTop = document.body.scrollHeight - document.body.clientHeight;
     }
 
     /* ----------------------------------------------------------------
@@ -146,12 +143,12 @@ export class ChatMovie
                 </span>: #{people.length}
             </div>
             <hr/>
-            <Container style={{ paddingBottom: 50 }}>
+            <Container>
                 <List dense>
                 {people.map(person =>
                     <ListItem button
-                            selected={person === this.whisper_to_}
-                            onClick={this._Select_participant.bind(this, person)}>
+                              selected={person === this.whisper_to_}
+                              onClick={this._Select_participant.bind(this, person)}>
                         <ListItemIcon>
                         {person === this.whisper_to_
                             ? <RecordVoiceOverIcon />
@@ -191,8 +188,7 @@ export class ChatMovie
                 </Toolbar>
             </AppBar>
             <Toolbar />
-            <Container id="message_body" 
-                       style={{ paddingBottom: 50 }}>
+            <Container style={{ wordWrap: "break-word", paddingBottom: 50 }}>
                 { messages.map(msg => this._Render_message(msg)) }
             </Container>
             <AppBar color="inherit" 
