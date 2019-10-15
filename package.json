@@ -5,7 +5,7 @@
   "main": "bin/index.js",
   "scripts": {
     "serve": "node bin/server",
-    "start": "ws -p 9991",
+    "start": "ws -p 9091",
     "dev": "webpack -w --mode development",
     "build": "tsc && webpack --mode production"
   },
@@ -20,20 +20,19 @@
   },
   "homepage": "https://github.com/samchon/tgrid.projects.chat#readme",
   "dependencies": {
-    "tgrid": "^0.2.0"
+    "tgrid": "^0.2.5"
   },
   "devDependencies": {
-    "@types/node": "^12.7.5",
-    "@types/react": "^16.9.2",
-    "@types/react-bootstrap": "^0.32.13",
-    "@types/react-dom": "^16.9.0",
-    "core-js": "^3.2.1",
-    "react": "^16.9.0",
-    "react-bootstrap": "^0.32.3",
-    "react-dom": "^16.9.0",
-    "ts-loader": "^6.1.0",
-    "typescript": "^3.6.3",
-    "webpack": "^4.40.2",
+    "@material-ui/core": "^4.5.1",
+    "@material-ui/icons": "^4.5.1",
+    "@types/react": "^16.9.6",
+    "@types/react-dom": "^16.9.2",
+    "core-js": "^3.3.2",
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2",
+    "ts-loader": "^6.2.0",
+    "typescript": "^3.6.4",
+    "webpack": "^4.41.1",
     "webpack-cli": "^3.3.9"
   }
 }

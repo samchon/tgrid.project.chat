@@ -1,6 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Panel, Button, Glyphicon } from "react-bootstrap";
+
+import AppBar from "@material-ui/core/AppBar";
+import Button from "@material-ui/core/Button";
+import Container from "@material-ui/core/Container";
+import IconButton from "@material-ui/core/IconButton";
+import Input from "@material-ui/core/Input";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+
+import GitHubIcon from "@material-ui/icons/Github";
+import MenuBookIcon from "@material-ui/icons/MenuBook";
 
 import { WebConnector } from "tgrid/protocols/web/WebConnector";
 import { Driver } from "tgrid/components/Driver";
@@ -12,18 +22,24 @@ import { Global } from "../Global";
 
 export class JoinMovie extends React.Component<JoinMovie.IProps>
 {
-    /* ----------------------------------------------------------------
-        CONSTRUCTOR
-    ---------------------------------------------------------------- */
-    public componentDidMount()
+    private get name_input_(): HTMLInputElement
     {
-        let input: HTMLInputElement = document.getElementById("name_input") as HTMLInputElement;
-        input.select();
+        return document.getElementById("name_input") as HTMLInputElement;
     }
 
     /* ----------------------------------------------------------------
         EVENT HANDLERS
     ---------------------------------------------------------------- */
+    public componentDidMount()
+    {
+        this.name_input_.select();
+    }
+
+    private _Open_link(url: string): void
+    {
+        window.open(url, "_blank");
+    }
+
     private _Handle_keyUp(event: React.KeyboardEvent): void
     {
         if (event.keyCode === 13)
@@ -62,45 +78,37 @@ export class JoinMovie extends React.Component<JoinMovie.IProps>
     ---------------------------------------------------------------- */
     public render(): JSX.Element
     {
-        return <Panel>
-            <Panel.Heading>
-                <Panel.Title> 
-                    <Glyphicon glyph="list" />
-                    {" Chat Application "}
-                </Panel.Title>
-            </Panel.Heading>
-            <Panel.Body>
-                <h1> Chat Application </h1>
-                <p> Demo Project of {this._Render_link(Global.TGRID, "TGrid")} </p>
-                <ul>
-                    <li> {this._Render_link(Global.REPOSITORY, "Github Repository")} </li>
-                    <li> Guide Documents </li>
-                    <ul>
-                        <li> {this._Render_link(Global.GUIDE_EN, "English")} </li>
-                        <li> {this._Render_link(Global.GUIDE_KR, "한국어")} </li>
-                    </ul>
-                </ul>
+        return <React.Fragment>
+            <AppBar>
+                <Toolbar>
+                    <Typography variant="h6"> Chat Application </Typography>
+                    <div style={{ flexGrow: 1 }} />
+                    <IconButton color="inherit" 
+                                onClick={this._Open_link.bind(this, Global.BOOK)}>
+                        <MenuBookIcon />
+                    </IconButton>
+                    <IconButton color="inherit"
+                                onClick={this._Open_link.bind(this, Global.GITHUB)}>
+                        <GitHubIcon />
+                    </IconButton>
+                </Toolbar>
+            </AppBar>
+            <Toolbar />
+            <Container>
+                <p> Insert your name: </p>
                 <p>
-                    Insert your name: 
-                    <input id="name_input" 
-                        type="text" 
-                        onKeyUp={this._Handle_keyUp.bind(this)} />
+                    <Input id="name_input" 
+                           placeholder="Your Name"
+                           onKeyUp={this._Handle_keyUp.bind(this)} /> 
+                    {" "}
+                    <Button color="primary" 
+                            variant="outlined" 
+                            onClick={this._Participate.bind(this)}> Enter </Button>
                 </p>
-            </Panel.Body>
-            <Panel.Footer>
-                <Button bsStyle="primary"
-                        onClick={this._Participate.bind(this)}> 
-                    <Glyphicon glyph="share-alt" />
-                    {" Participate in"}
-                </Button>
-            </Panel.Footer>
-        </Panel>
+            </Container>
+        </React.Fragment>
     }
-    
-    private _Render_link(url: string, text: string): JSX.Element
-    {
-        return <a href={url} target="_blank">{text}</a>;
-    }
+
 }
 namespace JoinMovie
 {
