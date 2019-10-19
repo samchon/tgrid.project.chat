@@ -6,7 +6,7 @@ module.exports = {
     },
     output: {
         filename: '[name].min.js',
-        path: path.resolve(__dirname, 'assets/js')
+        path: path.resolve(__dirname, 'public/assets/js')
     },
     devtool: 'source-map',
     resolve: {

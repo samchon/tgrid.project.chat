@@ -5,7 +5,7 @@
   "main": "bin/index.js",
   "scripts": {
     "serve": "node bin/server",
-    "start": "ws -p 9091",
+    "start": "ws -d public -p 9091",
     "dev": "webpack -w --mode development",
     "build": "tsc && webpack --mode production"
   },

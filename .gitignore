@@ -1,5 +1,5 @@
 bin/
 node_modules/
-assets/js
+public/assets/js
 
 package-lock.json
