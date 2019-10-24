@@ -9,7 +9,7 @@ import Input from "@material-ui/core/Input";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 
-import GitHubIcon from "@material-ui/icons/Github";
+import GitHubIcon from "@material-ui/icons/GitHub";
 import MenuBookIcon from "@material-ui/icons/MenuBook";
 
 import { WebConnector } from "tgrid/protocols/web/WebConnector";
