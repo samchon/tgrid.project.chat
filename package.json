@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/samchon/tgrid.projects.chat#readme",
   "dependencies": {
-    "tgrid": "^0.2.5"
+    "tgrid": "^0.2.7"
   },
   "devDependencies": {
     "@material-ui/core": "^4.5.1",
